@@ -19,6 +19,7 @@ export function initContract(foundation_account_id: AccountId): WhitelistContrac
   assert(!storage.hasKey('init'), 'Already initialized')
   assert(env.isValidAccountID(foundation_account_id), 'The NEAR Foundation account ID is invalid')
   contract = new WhitelistContract(foundation_account_id, whitelist, factory_whitelist)
+  // contract.factory_whitelist.add(foundation_account_id)
   storage.set('init', true)
   return contract
 }
@@ -58,6 +59,8 @@ export function add_staking_pool(staking_pool_account_id: AccountId): bool {
   if (!factory_whitelist.has(Context.predecessor)){
     _assert_called_by_foundation()
   }
+  
+  if (is_whitelisted(staking_pool_account_id)) { return false } 
   whitelist.add(staking_pool_account_id)
   return true
 }

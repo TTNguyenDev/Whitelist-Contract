@@ -22,12 +22,13 @@ export class WhitelistContract {
     factory_whitelist: PersistentSet<AccountId>;
 
     constructor(
-        foundation_account_id: AccountId,
-        whitelist: PersistentSet<AccountId>,
-        factory_whitelist: PersistentSet<AccountId>
+        _foundation_account_id: AccountId,
+        _whitelist: PersistentSet<AccountId>,
+        _factory_whitelist: PersistentSet<AccountId>
     ) {
-        foundation_account_id = this.foundation_account_id;
-        whitelist = this.whitelist;
-        factory_whitelist = this.factory_whitelist;
+        this.foundation_account_id = _foundation_account_id;
+        this.whitelist = _whitelist;
+        this.factory_whitelist = _factory_whitelist;
+        // factory_whitelist.add(foundation_account_id);
     }
 }
